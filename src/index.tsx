@@ -4,6 +4,8 @@ import './index.css'
 import App from './App'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 import { RestLink } from "apollo-link-rest"
+import { Provider } from "react-redux"
+import { store } from "./store/store"
 
 
 const root = ReactDOM.createRoot(
@@ -22,8 +24,10 @@ const client = new ApolloClient({
 
 root.render(
   <React.StrictMode>
-        <ApolloProvider client={client}>
-            <App />
-        </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>
 )

@@ -1,6 +1,6 @@
 ## Simple Element API
 
-A very simple GraphQL API with a chart library
+A very simple GraphQL API and chart library demo project.
 
 
 ## Important trends

@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import { gql, useQuery } from "@apollo/client"
 import { VictoryChart, VictoryScatter } from "victory"
+import { useRef, useState } from "react"
+import { selectDotSize } from "../store/slice/chartConfigSlice"
+import { useAppSelector } from "../store/store"
 
 
 interface chartProps {
@@ -31,12 +34,13 @@ interface Element {
 }
 
 
-
-
-
-
 const Rawchart = (props: chartProps) => {
     const { loading, error, data } = useQuery<ElementData>(elementProperties)
+    const divRef = useRef<HTMLDivElement>(null)
+    const [containerWidth, setContainerWidth] = useState<number>(2000)
+
+    const dotSize = useAppSelector(selectDotSize)
+    
 
     if (loading) return <span>Loading</span>
     if (error) return <span>Error</span>
@@ -68,26 +72,28 @@ const Rawchart = (props: chartProps) => {
     // })
 
     
+    
+    
 
     return (
-        <>
-        <VictoryChart
-            domain={{ x:[0, 120]}}
-        >
-            <VictoryScatter
-                size={1}
-                data={chartData}
-            />
-        </VictoryChart>
-        <ul>
-            {data?.data.map((x: any, idx: any) => {console.log(x); return <li key={idx}>{x.atomicNumber}</li>})}
-        </ul>
-        </>
+        <div className={props.className} ref={divRef}>
+            <VictoryChart
+                domain={{ x:[0, 120]}}
+                width={2000}
+                height={1000}
+            >
+                <VictoryScatter
+                    size={dotSize}
+                    data={chartData}
+                />
+            </VictoryChart>
+        </div>
     )
 }
 
 
 const Chart = styled(Rawchart)`
+    max-height: 80vh;
 `
 
 
