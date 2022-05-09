@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../store"
+import { Field } from "../../type"
 
 
 interface ChartConfig {
     dotSize: number
-    xField: string
-    yField: string
+    xField: Field
+    yField: Field
     animate: boolean
 }
 
@@ -17,8 +18,8 @@ const initialState: ChartConfig = {
     animate: true
 }
 
-type XField = "atomicNumber" | ""
-type YField = "meltingPoint" | "boilingPoint"
+// export type XField = "atomicNumber" | ""
+// export type YField = "meltingPoint" | "boilingPoint"
 
 
 const chartConfigSlice = createSlice({
@@ -28,10 +29,10 @@ const chartConfigSlice = createSlice({
         setDotSize: (state, action: PayloadAction<number>) => {
             state.dotSize = action.payload
         },
-        setXField: (state, action: PayloadAction<XField>) => {
+        setXField: (state, action: PayloadAction<Field>) => {
             state.xField = action.payload
         },
-        setYField: (state, action: PayloadAction<YField>) => {
+        setYField: (state, action: PayloadAction<Field>) => {
             state.yField = action.payload
         },
         setAnimate: (state, action: PayloadAction<boolean>) => {

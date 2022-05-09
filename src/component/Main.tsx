@@ -19,6 +19,7 @@ const RawMain = (props: MainProps) => {
 
 const Main = styled(RawMain)`
     background-color: lightblue;
+    min-height: 100vh;
     flex: 1 1 0;
 `
 
