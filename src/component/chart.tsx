@@ -5,6 +5,7 @@ import { useRef, useState } from "react"
 import { selectDotSize, selectXField, selectYField } from "../store/slice/chartConfigSlice"
 import { useAppSelector } from "../store/store"
 import { Element, Field } from "../type"
+import { axisWord } from "../type"
 
 
 interface chartProps {
@@ -16,9 +17,28 @@ const elementProperties = gql`
     query GET_ALL_ELEMENT {
         data @rest(type: "Elements",  ,path: "/elements") {
             atomicNumber
+            symbol
             name
+            atomicMass
+            electronicConfiguration
+            electronegativity
+            atomicRadius
+            ionRadius
+            vanDerWaalsRadius
+            ionizationEnergy
+            electronAffinity
+            oxidationStates
+            standardState
+            bondingType
             meltingPoint
             boilingPoint
+            density
+            groupBlock
+            yearDiscovered
+            block
+            cpkHexColor
+            period
+            group
         }
     }
 `
@@ -34,17 +54,7 @@ interface ElementData {
 //     boilingPoint: number
 // }
 
-type AxisLabel = {
-    [key in Field]: string
-}
-const AxisLabel: AxisLabel = {
-    "symbol": "Symbol",
-    "atomicNumber": "Atomic Number",
-    "name": "Name",
-    "atomicMass": "Atomic Mass",
-    "meltingPoint": "Melting Point (K)",
-    "boilingPoint": "Boiling POint (K)",
-}
+
 
 
 const Rawchart = (props: chartProps) => {
@@ -88,8 +98,6 @@ const Rawchart = (props: chartProps) => {
     //         })
     //     else return null
     // })
-
-    
     
     
 
@@ -100,10 +108,13 @@ const Rawchart = (props: chartProps) => {
                 width={2000}
                 height={1000}
                 padding={120}
-                animate={true}
+                animate={{
+                    duration: 1000,
+                    easing: "cubicInOut"
+                }}
             >
                 <VictoryAxis
-                    label={AxisLabel[xField]}
+                    label={axisWord[xField].axisLabel + (axisWord[xField].unit ? ` (${axisWord[xField].unit})` : "")}
                     style={{
                         axisLabel: {fontSize: "30", padding: "40"},
                         tickLabels: {fontSize: "24", padding: "0"}
@@ -112,7 +123,7 @@ const Rawchart = (props: chartProps) => {
                 />
                 <VictoryAxis
                     dependentAxis
-                    label={AxisLabel[yField]}
+                    label={axisWord[yField].axisLabel + (axisWord[yField].unit ? ` (${axisWord[yField].unit})` : "")}
                     tickCount={10}
                     style={{
                         axisLabel: {fontSize: "30", padding: "70"},
