@@ -12,7 +12,7 @@ interface ChartConfig {
 
 
 const initialState: ChartConfig = {
-    dotSize: 4,
+    dotSize: 2,
     xField: "atomicNumber",
     yField: "meltingPoint",
     animate: true

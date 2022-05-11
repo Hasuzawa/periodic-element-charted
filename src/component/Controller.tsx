@@ -3,12 +3,15 @@ import { selectAnimate, selectDotSize, selectXField, selectYField, setDotSize, s
 import { useAppDispatch, useAppSelector } from "../store/store"
 // import { YField } from "../store/slice/chartConfigSlice"
 import { xFields, yFields, YField, XField, axisWord } from "../type"
+import postmanLogoPath from "../images/postman_logo.svg"
+import Footer from "./Footer"
 
 
 interface ControllerProps {
     className?: string
     children?: React.ReactNode
 }
+
 
 
 const RawController = (props: ControllerProps) => {
@@ -20,9 +23,12 @@ const RawController = (props: ControllerProps) => {
     const dispatch = useAppDispatch()
 
 
+
+
     return (
         <div className={props.className}>
             <span>hello world</span>
+
             <div>
                 <label>Dot Size</label>
                 <input type="range" min={0} max={10} step={0.5} value={dotSize} onChange={(e) => dispatch(setDotSize(Number(e.target.value)))} />
@@ -43,6 +49,7 @@ const RawController = (props: ControllerProps) => {
                     {xFields.map((field, idx) => <option key={idx} value={field}>{axisWord[field].axisLabel}</option>)}
                 </select>
             </div>
+            <Footer />
         </div>
     )
 }
@@ -50,8 +57,11 @@ const RawController = (props: ControllerProps) => {
 
 const Controller = styled(RawController)`
     position: sticky;
-    width: 18em;
+    width: 16em;
     background-color: lightcoral;
+    padding: 1em;
+    display: flex;
+    flex-flow: column nowrap;
 `
 
 
