@@ -26,7 +26,60 @@ export const fields = [
 
 export type Field = typeof fields[number]
 
-// type YField = Pick<Field, "meltingPoint">
+
+// these fields can be used as Y axis
+export const yFields = [
+    "atomicNumber",
+    "atomicMass",
+    "electronegativity",
+    "atomicRadius",
+    "ionRadius",
+    "vanDerWaalsRadius",
+    "ionizationEnergy",
+    "electronAffinity",
+    "oxidationStates",
+    "standardState",
+    "bondingType",
+    "meltingPoint",
+    "boilingPoint",
+    "density",
+    "groupBlock",
+    "yearDiscovered",
+    "block",
+    "period",
+    "group",
+] as const
+
+export type YField = typeof yFields[number]
+
+
+// these fields can be used as X axis
+export const xFields = [
+    "atomicMass",
+    "atomicNumber",
+    "atomicRadius",
+    "block",
+    "boilingPoint",
+    "bondingType",
+    "density",
+    "electronAffinity",
+    "electronegativity",
+    "group",
+    // "groupBlock",
+    "ionRadius",
+    "ionizationEnergy",
+    "meltingPoint",
+    "period",
+    "standardState",
+    // "symbol",
+    "vanDerWaalsRadius",
+    "yearDiscovered"
+] as const
+
+export type XField = typeof xFields[number]
+
+
+
 
 export type Element = {
     [name in Field]: string | number
@@ -87,7 +140,7 @@ export const axisWord: AxisWord = {
     },
     meltingPoint: {
         axisLabel: "Melting Point",
-        unit: "K:"
+        unit: "K"
     },
     boilingPoint: {
         axisLabel: "Boiling Point",

@@ -81,8 +81,9 @@ const Rawchart = (props: chartProps) => {
 
     let chartData = []
 
+
     for (const element of data.data) {
-        if (element[xField] && element[yField] && element[yField] != "unknown")
+        if (element[xField] && element[yField] && element[yField] !== "unknown" && element[xField] !== "unknown")
             chartData.push({
                 x: element[xField],
                 y: element[yField],
@@ -105,9 +106,9 @@ const Rawchart = (props: chartProps) => {
         <div className={props.className} ref={divRef}>
             <VictoryChart
                 // domain={{ x:[0, 120]}}
-                width={2000}
-                height={1000}
-                padding={120}
+                // width={2000}
+                // height={1000}
+                padding={30}
                 animate={{
                     duration: 1000,
                     easing: "cubicInOut"
@@ -116,8 +117,8 @@ const Rawchart = (props: chartProps) => {
                 <VictoryAxis
                     label={axisWord[xField].axisLabel + (axisWord[xField].unit ? ` (${axisWord[xField].unit})` : "")}
                     style={{
-                        axisLabel: {fontSize: "30", padding: "40"},
-                        tickLabels: {fontSize: "24", padding: "0"}
+                        axisLabel: {fontSize: "10", padding: "20"},
+                        tickLabels: {fontSize: "8", padding: "0"}
                     }}
                     tickCount={15}
                 />
@@ -126,8 +127,8 @@ const Rawchart = (props: chartProps) => {
                     label={axisWord[yField].axisLabel + (axisWord[yField].unit ? ` (${axisWord[yField].unit})` : "")}
                     tickCount={10}
                     style={{
-                        axisLabel: {fontSize: "30", padding: "70"},
-                        tickLabels: {fontSize: "24", padding: "0"}
+                        axisLabel: {fontSize: "10", padding: "35"},
+                        tickLabels: {fontSize: "8", padding: "0"}
                     }}
                 />
                 <VictoryScatter
@@ -142,7 +143,8 @@ const Rawchart = (props: chartProps) => {
 
 
 const Chart = styled(Rawchart)`
-    max-height: 80vh;
+    width: 100%;
+    height: 100%;
 `
 
 

@@ -23,6 +23,8 @@ const RawApp = (props: AppProps) => {
 const App = styled(RawApp)`
     display: flex;
     flex-flow: row nowrap;
+    min-height: 100vh;
+    height: 100vh;
 `
 
 
